@@ -13,10 +13,9 @@ myGcdG x y
  | otherwise = myGcdG x (y - x)
 
 myGcdPM :: Int -> Int -> Int
-myGcdPM x y = helper x y
- where 
-    helper x 0 = x
-    helper 0 y = y
-    helper x y = myGcdPM y (mod x y)
+myGcdPM x y
+myGcdPM x 0 = x
+myGcdPM 0 y = y
+myGcdPM x y = myGcdPM y (mod x y)
 
 
