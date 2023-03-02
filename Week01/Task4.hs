@@ -13,7 +13,6 @@ myGcdG x y
  | otherwise = myGcdG x (y - x)
 
 myGcdPM :: Int -> Int -> Int
-myGcdPM x y
 myGcdPM x 0 = x
 myGcdPM 0 y = y
 myGcdPM x y = myGcdPM y (mod x y)
