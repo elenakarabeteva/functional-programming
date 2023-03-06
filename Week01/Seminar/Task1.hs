@@ -61,5 +61,6 @@ roundTwoDig n = (fromIntegral $ round $ n * 100) / 100
 roundTwoDigButWithMagic :: Double -> Double
 roundTwoDigButWithMagic = (/ 100) . fromIntegral . round . (* 100)
 
+-- another way to do it
 -- roundTwoDigButWithMagic :: Double -> Double
 -- roundTwoDigButWithMagic x = ((/ 100) . fromIntegral . round . (x * 100) x)
