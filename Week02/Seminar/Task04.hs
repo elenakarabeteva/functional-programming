@@ -11,5 +11,5 @@ isPrime number = number > 1 && helper 2
  where
     helper d
      | d >= number = True
-     | mod number d== 0 = False
+     | mod number d == 0 = False
      | otherwise = helper (d + 1)
