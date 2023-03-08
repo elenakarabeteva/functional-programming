@@ -11,7 +11,14 @@ sumPrimeDivs 0 = 0
 sumPrimeDivs number = helper 2
  where
     helper d
-     | d >= number && number > 1 = 0
-     | mod number d == 0 = 0
-     | otherwise = d + helper (d + 1)
+     | d > number = 0
+     | mod number d == 0 && isPrime d = d + helper (d + 1)
+     | otherwise = helper (d + 1)
 
+isPrime :: Int -> Bool
+isPrime number = number > 1 && helper 2
+ where
+    helper d
+     | d >= number = True
+     | mod number d == 0 = False
+     | otherwise = helper (d + 1)
