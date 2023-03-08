@@ -9,9 +9,9 @@ main = do
     print $ countDigitsRec 123 == 3
 
 countDigitsRec :: Int -> Int
+countDigitsRec 0 = 0
 countDigitsRec number
  | number < 0 = error "n was negative"
- | number == 0 = 0
  | otherwise = 1 + countDigitsRec (div number 10)
 
 countDigitsIter :: Int -> Int

@@ -12,7 +12,5 @@ isPrime number = number > 1 && helper 2
      | otherwise = helper (d + 1)
 
 truncatablePrime :: Int -> Bool
-truncatablePrime number 
- | number == 0 = True
- | isPrime number = truncatablePrime (div number 10)
- | otherwise = False
+truncatablePrime 0 = True
+truncatablePrime number = isPrime number && truncatablePrime (div number 10)

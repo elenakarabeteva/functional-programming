@@ -9,7 +9,7 @@ main = do
     print $ removeD 2 1234 == 134
 
 removeD :: Int -> Int -> Int
+removeD _ 0 = 0
 removeD d n
- | n == 0 = 0
  | mod n 10 /= d = removeD d (div n 10) * 10 + mod n 10
  | otherwise = removeD d (div n 10)

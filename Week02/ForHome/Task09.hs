@@ -14,7 +14,7 @@ main = do
 everyOther :: Int -> Int
 everyOther number = helper number 0 0
  where
+    helper 0 position result = result 
     helper number position result
-     | number == 0 = result
      | mod position 2 /= 0 = helper (div number 10) (position + 1) (result * 10 + mod number 10)
      | otherwise = helper (div number 10) (position + 1) result
