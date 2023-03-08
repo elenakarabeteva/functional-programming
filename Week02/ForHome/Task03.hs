@@ -8,7 +8,7 @@ main = do
 
 sumPrimeDivs :: Int -> Int
 sumPrimeDivs 0 = 0
-sumPrimeDivs number = helper 2
+sumPrimeDivs number = helper 1
  where
     helper d
      | d > number = 0
