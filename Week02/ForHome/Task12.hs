@@ -9,4 +9,3 @@ findSum a b n = (a + helper 0 b n) + (a + helper 0 b (n - 1)) + (a + helper 0 b 
     helper power b n
      | power == n = 0 
      | otherwise = 2 ^ power * b + (helper (power + 1) b n) 
-

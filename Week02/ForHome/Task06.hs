@@ -6,7 +6,6 @@ main = do
     print $ isInteresting 70 == True 
     print $ isInteresting 5 == True 
     print $ isInteresting 4 == True 
-    
 
 sumDigits :: Int -> Int
 sumDigits 0 = 0
