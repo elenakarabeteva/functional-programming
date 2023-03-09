@@ -13,4 +13,4 @@ sumDigits number = mod number 10 + sumDigits (div number 10)
 
 isInteresting :: Int -> Bool
 isInteresting 0 = error "can not divide with 0"
-isInteresting number = (mod number (sumDigits number) == 0)
+isInteresting number = mod number (sumDigits number) == 0
