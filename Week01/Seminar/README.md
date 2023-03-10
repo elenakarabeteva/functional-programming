@@ -15,6 +15,7 @@ Define functions that return:
 - the average of two whole numbers
 - the number rounded to the second digit after the `.`
 
+
 # Task 2
 Define a predicates that check:
 
@@ -23,11 +24,13 @@ Define a predicates that check:
   - using guards.
 - whether a whole number x is between two whole numbers - start and finish in one line without using if-else.
 
+
 # Task 3
 Define a recursive and an iterative function for calculating the factorial of a non-negative number.
 
 - solve with a linearly recursive process;
 - solve using a linearly iterative process.
+
 
 # Task 4
 Define a recursive and an iterative function for calculating the number at index i in the Fibonacci sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...).
