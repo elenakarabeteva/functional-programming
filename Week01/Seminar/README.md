@@ -13,4 +13,4 @@ Define functions that return:
 - the quotient and remainder of the division of two real numbers
 - the quotient of the division of two real numbers
 - the average of two whole numbers
-- the number rounded to the second digit after the `#RRGGBB`.
+- the number rounded to the second digit after the `.`
