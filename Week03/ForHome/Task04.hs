@@ -11,6 +11,7 @@ sumDigits number = mod number 10 + sumDigits (div number 10)
 sumDivisibleNumbers :: Int -> Int -> Int -> Int
 sumDivisibleNumbers start finish k = helper (min start finish) 0
  where
+    helper :: Int -> Int -> Int
     helper realStart result
      | realStart == realEnd = result
      | mod (sumDigits realStart) k == 0 = helper (realStart + 1) (result + realStart)
