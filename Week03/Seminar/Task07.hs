@@ -5,7 +5,7 @@ main = do
 
 factIter :: Integer -> Integer
 factIter n = helper 1 n
- where 
+ where  
     helper result 0 = result 
     helper result leftover = helper (result * leftover) (leftover - 1)
 
