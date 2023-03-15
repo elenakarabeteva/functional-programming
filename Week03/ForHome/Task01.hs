@@ -22,9 +22,10 @@ reversed number = helper number 0
     helper leftover result = helper (div leftover 10) (result * 10 + mod leftover 10)
 
 removeFistOccurrence :: Int -> Int -> Int
-removeFistOccurrence number digit = helper number 0 0 (countDigits number)
+removeFistOccurrence number digit = helper number 0 0
  where
-    helper 0 result count digitCount = (reversed result) * 10^(digitCount - countDigits(reversed result)) -- adding zeros at the end
-    helper number result count digitCount
-     | mod number 10 == digit && count == 0 = helper (div number 10) result (count + 1) (digitCount - 1)
-     | otherwise = helper (div number 10) (result * 10 + (mod number 10)) count digitCount
+    helper :: Int -> Int -> Int -> Int
+    helper 0 result count = (reversed result) * 10^(countDigits number - countDigits (reversed result) - 1) -- adding zeros at the end
+    helper number result count
+     | mod number 10 == digit && count == 0 = helper (div number 10) result (count + 1)
+     | otherwise = helper (div number 10) (result * 10 + mod number 10) count

@@ -18,4 +18,4 @@ multiplication number = helper 1 0
 
 calcSeriesSum :: Int -> Int -> Double
 calcSeriesSum x 0 = -2.0
-calcSeriesSum x n = ((-2)^(n + 1) * (fromIntegral x)^n) / (fromIntegral $ multiplication $ n) + calcSeriesSum x (n - 1)
+calcSeriesSum x n = ((-2)^(n + 1) * fromIntegral x^n) / (fromIntegral $ multiplication $ n) + calcSeriesSum x (n - 1)

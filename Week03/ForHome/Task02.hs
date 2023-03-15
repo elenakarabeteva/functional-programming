@@ -19,14 +19,14 @@ countDigits :: Int -> Int
 countDigits 0 = 0
 countDigits number = 1 + countDigits (div number 10)
 
-removeFistOccurrence :: Int -> Int -> Int
-removeFistOccurrence number digit = helper number 0 0
+removeMax :: Int -> Int -> Int
+removeMax number digit = helper number 0 0
  where
     helper :: Int -> Int -> Int -> Int
     helper 0 result count = result -- adding zeros at the end
     helper number result count 
-     | mod number 10 == digit && count == 0 = helper (div number 10) result (count + 1)
-     | otherwise = helper (div number 10) (result * 10 + (mod number 10)) count
+     | mod number 10 == digit && count == 0 = helper (div number 10) result (count + 1) -- remove first occurrance
+     | otherwise = helper (div number 10) (result * 10 + mod number 10) count
 
 findMax :: Int -> Int
 findMax number = helper (div number 10) (mod number 10)
@@ -38,8 +38,10 @@ findMax number = helper (div number 10) (mod number 10)
      | otherwise = helper (div leftover 10) result
 
 sortN :: Int -> Int
-sortN number = helper number 0 0 (countDigits number)
+sortN number = helper number 0 0 
  where
-    helper :: Int -> Int -> Int -> Int -> Int
-    helper 0 result maxNumber digitCount = (result * 10^(digitCount - countDigits result))
-    helper number result maxNumber digitCount = helper (removeFistOccurrence number (findMax number)) (result * 10 + (findMax number)) (findMax number) digitCount
+    helper :: Int -> Int -> Int -> Int
+    helper 0 result max = result * 10^(countDigits number - countDigits result)
+    helper number result max = helper (removeMax number maxNumber) (result * 10 + maxNumber) maxNumber
+     where
+         maxNumber = findMax number
