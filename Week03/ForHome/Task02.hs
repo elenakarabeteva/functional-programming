@@ -37,6 +37,8 @@ findMax number = helper (div number 10) (mod number 10)
      | mod leftover 10 > result = helper (div leftover 10) (mod leftover 10)
      | otherwise = helper (div leftover 10) result
 
+addZerosAtEnd :: Int -> Int -> Int
+addZerosAtEnd number result = result * 10^(countDigits number - countDigits result)
 
 sortN :: Int -> Int
 sortN number = helper number 0 0 
