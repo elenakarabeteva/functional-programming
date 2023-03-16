@@ -10,6 +10,9 @@ main = do
     print $ removeFistOccurrence 1212 2 == 121
     print $ removeFistOccurrence (removeFistOccurrence 1212 1) 1 == 22
 
+addZerosAtEnd :: Int -> Int -> Int
+addZerosAtEnd number result = (reversed result) * 10^(countDigits number - countDigits (reversed result) - 1)
+
 countDigits :: Int -> Int
 countDigits 0 = 0
 countDigits number = 1 + countDigits (div number 10)
@@ -25,7 +28,7 @@ removeFistOccurrence :: Int -> Int -> Int
 removeFistOccurrence number digit = helper number 0 0
  where
     helper :: Int -> Int -> Int -> Int
-    helper 0 result count = (reversed result) * 10^(countDigits number - countDigits (reversed result) - 1) -- adding zeros at the end
+    helper 0 result count = addZerosAtEnd number result
     helper number result count
      | mod number 10 == digit && count == 0 = helper (div number 10) result (count + 1)
      | otherwise = helper (div number 10) (result * 10 + mod number 10) count

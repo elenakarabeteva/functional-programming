@@ -37,11 +37,14 @@ findMax number = helper (div number 10) (mod number 10)
      | mod leftover 10 > result = helper (div leftover 10) (mod leftover 10)
      | otherwise = helper (div leftover 10) result
 
+addZerosAtEnd :: Int -> Int -> Int
+addZerosAtEnd number result = result * 10^(countDigits number - countDigits result)
+
 sortN :: Int -> Int
 sortN number = helper number 0 0 
  where
     helper :: Int -> Int -> Int -> Int
-    helper 0 result max = result * 10^(countDigits number - countDigits result)
+    helper 0 result max = addZerosAtEnd number result
     helper number result max = helper (removeMax number maxNumber) (result * 10 + maxNumber) maxNumber
      where
          maxNumber = findMax number
