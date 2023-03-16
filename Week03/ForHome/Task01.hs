@@ -10,8 +10,7 @@ main = do
     print $ removeFistOccurrence 1212 2 == 121
     print $ removeFistOccurrence (removeFistOccurrence 1212 1) 1 == 22
 
-addZerosAtEnd :: Int -> Int -> Int
-addZerosAtEnd number result = (reversed result) * 10^(countDigits number - countDigits (reversed result) - 1)
+
 
 countDigits :: Int -> Int
 countDigits 0 = 0
