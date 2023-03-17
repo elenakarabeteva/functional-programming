@@ -39,7 +39,7 @@ eqSumPowDig hMax power
  where 
     helper :: Int -> Int -> Int
     helper number result
-     | number == hMax = result 
+     | number == hMax + 1 = result 
      | isSpecialNumber number power = helper (number + 1) (result + number)
      | otherwise = helper (number + 1) result
 
