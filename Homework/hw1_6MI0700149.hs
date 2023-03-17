@@ -21,7 +21,9 @@ main = do
     -- print $ getNthSevenlikeNum 5 ➝ 50
     -- print $ getNthSevenlikeNum 6 ➝ 56
 
--- Task1
+{-
+    Task 1
+-}
 isSpecialNumber :: Int -> Int -> Bool
 isSpecialNumber n power = n == helper n power
  where 
