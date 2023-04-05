@@ -15,8 +15,7 @@ main = do
 isPresentRecNonPM :: Int -> [Int] -> Bool
 isPresentRecNonPM number xs
  | null xs = False
- | number == head xs = True
- | otherwise = isPresentRecNonPM number (tail xs)
+ | otherwise = number == head xs || isPresentRecNonPM number (tail xs)
 
 isPresentRecPM :: Int -> [Int] -> Bool
 isPresentRecPM _ [] = False

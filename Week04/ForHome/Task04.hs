@@ -9,7 +9,7 @@ main = do
     print $ sumUnevenHOF 564 565 == 565
 
 sumUnevenLC :: Int -> Int -> Int
-sumUnevenLC x y = sum [number | number <- [min x y .. max x y], mod number 2 /= 0]
+sumUnevenLC x y = sum [number | number <- [min x y .. max x y], odd number]
 
 sumUnevenHOF :: Int -> Int -> Int
 sumUnevenHOF x y = sum $ filter (\ d -> mod d 2 /= 0) [min x y .. max x y]
