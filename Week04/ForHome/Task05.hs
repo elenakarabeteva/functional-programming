@@ -9,4 +9,4 @@ main = do
     print $ isAscending 12332 == False    
 
 isAscending :: Int -> Bool
-isAscending number = and [x <= y | (x, y) <- (zip (show number) (tail $ show number))]
+isAscending number = and [x <= y | (x, y) <- zip (show number) (tail $ show number)]

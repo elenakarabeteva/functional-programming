@@ -13,13 +13,13 @@ main = do
     print $ isPresentFunc 0 [0, -1, 2] == True
 
 isPresentRecNonPM :: Int -> [Int] -> Bool
-isPresentRecNonPM number xs
- | null xs = False
- | otherwise = number == head xs || isPresentRecNonPM number (tail xs)
+isPresentRecNonPM number list
+ | null list = False
+ | otherwise = number == head list || isPresentRecNonPM number (tail list)
 
 isPresentRecPM :: Int -> [Int] -> Bool
 isPresentRecPM _ [] = False
-isPresentRecPM number xs = number == head xs || isPresentRecPM number (tail xs)
+isPresentRecPM number (x:xs) = number == x || isPresentRecPM number xs
 
 isPresentFunc :: Int -> [Int] -> Bool
 isPresentFunc number xs = elem number xs
