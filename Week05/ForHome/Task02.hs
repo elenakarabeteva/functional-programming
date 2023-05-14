@@ -17,4 +17,3 @@ getPalindromes number
  where
     divisors = filter (\x -> x > 1 && mod number x == 0) [2 .. number]
     list = filter isPalindrome divisors
-
