@@ -9,17 +9,11 @@ main = do
     print $ getNameLengthColor db ((== 'N'), (< 133)) == [("Terms of Endearment",132)]
     print $ getNameLengthColor db ((== 'N'), (< 300)) == [("Terms of Endearment",132)]
 
-    print $ getStudio db [2001]
-    print $ getStudio db [2002]
-    print $ getStudio db [1990]
-    print $ getStudio db [1990, 2001, 1976]
-    print $ getStudio db [1979, 2002]
-    print $ getYears db
-    -- print $ (getStudios db) [2001] -- → [("USA Entertainm.","Stephen Spielberg"),("Buzzfeed Entertainm.","Christian Baesler")]
-    -- print $ (getStudios db) [2002] -- → [("Buzzfeed Entertainm.","Christian Baesler")]
-    -- print $ (getStudios db) [1990] -- → [("Disney","Merv Griffin"),("Buzzfeed Entertainm.","Christian Baesler")]
-    -- print $ (getStudios db) [1990, 2001, 1976] -- → [("Disney","Merv Griffin"),("USA Entertainm.","Stephen Spielberg"),("Buzzfeed Entertainm.","Christian Baesler")]
-    -- print $ (getStudios db) [1979, 2002] -- → [("Buzzfeed Entertainm.","Christian Baesler")]
+    print $ (getStudios db) [2001] == [("USA Entertainm.","Stephen Spielberg"),("Buzzfeed Entertainm.","Christian Baesler")]
+    print $ (getStudios db) [2002] == [("Buzzfeed Entertainm.","Christian Baesler")]
+    print $ (getStudios db) [1990] == [("Disney","Merv Griffin"),("Buzzfeed Entertainm.","Christian Baesler")]
+    print $ (getStudios db) [1990, 2001, 1976] == [("Disney","Merv Griffin"),("USA Entertainm.","Stephen Spielberg"),("Buzzfeed Entertainm.","Christian Baesler")]
+    print $ (getStudios db) [1979, 2002] == [("Buzzfeed Entertainm.","Christian Baesler")]
 
 getNameLengthColor :: MovieDB -> ((Char -> Bool), (Int -> Bool)) -> [(Title, Length)]
 getNameLengthColor (movies, _, _) f = filter (\(_, length) -> length /= longestLength && length > 0 && snd f length) getMovieTitleAndLengthInColor
@@ -27,17 +21,14 @@ getNameLengthColor (movies, _, _) f = filter (\(_, length) -> length /= longestL
     getMovieTitleAndLengthInColor = map (\(title, _, length, _, _) -> (title, length)) $ filter (\(_, _, _, inColor, _) -> fst f inColor) movies
     longestLength = foldl (\maxLen (_, length) -> if length > maxLen then length else maxLen) 0 getMovieTitleAndLengthInColor
 
-getYears :: MovieDB -> [(Name, Year)]
-getYears (movies, _, _) = map (\(_, year, _, _, studioName) -> (studioName, year)) movies
-
-
--- filter the data so that it has one movie per year from studio
-getStudio :: MovieDB -> [Year] -> [Studio]
-getStudio (movies, studios, _) years = filteredStudios
+getStudios :: MovieDB -> ([Year] -> [(StudioName, Name)])
+getStudios (movies, studios, execs) years = moviesInStudio
  where
-    filteredStudios = filter (\ (name, _) -> not (elem name filteredYears)) studios
-    filteredYears = map (\ (_, _, _, _, studioName) -> (studioName)) $ filter (\ (_, year, _, _, _) -> not (elem year years)) movies
-
+    moviesInStudio = [(studioName, producerName) | (studioName, producerName) <- getStudioNameProducerName, 
+        let nubYears = nub [year | (_, year, _, _, studio) <- movies, studioName == studio] in length (combineLists years nubYears) > 0 && length nubYears == 1 || 
+        not (elem studioName $ map (\(_, _, _, _, studio) -> studio) movies)]
+    combineLists xs ys = foldr (\y acc -> if elem y xs then y:acc else acc) [] ys
+    getStudioNameProducerName = [(studioName, producerName) | (studioName, sProducerID) <- studios, (producerName, pProducerID, _) <- execs, sProducerID == pProducerID]
 
 type Title = String
 type Year = Int
