@@ -3,24 +3,28 @@ import Data.Char
 
 main :: IO()
 main = do
+    --Task 1
     print $ getNameLengthColor db ((== 'Y'), (> 106)) == [("Pretty Woman",119),("The Man Who Wasn't There",116),("Logan's run",120),("Empire Strikes Back",111),("Star Trek",132),("Star Trek: Nemesis",116)]
     print $ getNameLengthColor db ((== 'Y'), (> 237)) == []
     print $ getNameLengthColor db ((== 'Y'), (> 238)) == []
     print $ getNameLengthColor db ((== 'N'), (< 133)) == [("Terms of Endearment",132)]
     print $ getNameLengthColor db ((== 'N'), (< 300)) == [("Terms of Endearment",132)]
 
+    -- Task 2
     print $ (getStudios db) [2001] == [("USA Entertainm.","Stephen Spielberg"),("Buzzfeed Entertainm.","Christian Baesler")]
     print $ (getStudios db) [2002] == [("Buzzfeed Entertainm.","Christian Baesler")]
     print $ (getStudios db) [1990] == [("Disney","Merv Griffin"),("Buzzfeed Entertainm.","Christian Baesler")]
     print $ (getStudios db) [1990, 2001, 1976] == [("Disney","Merv Griffin"),("USA Entertainm.","Stephen Spielberg"),("Buzzfeed Entertainm.","Christian Baesler")]
     print $ (getStudios db) [1979, 2002] == [("Buzzfeed Entertainm.","Christian Baesler")]
 
+--Task 1
 getNameLengthColor :: MovieDB -> ((Char -> Bool), (Int -> Bool)) -> [(Title, Length)]
-getNameLengthColor (movies, _, _) f = filter (\(_, length) -> length /= longestLength && length > 0 && snd f length) getMovieTitleAndLengthInColor
+getNameLengthColor (movies, _, _) f = filter (\(_, length) -> length /= longest && length > 0 && snd f length) getMovieTitleAndLengthInColor
  where
     getMovieTitleAndLengthInColor = map (\(title, _, length, _, _) -> (title, length)) $ filter (\(_, _, _, inColor, _) -> fst f inColor) movies
-    longestLength = foldl (\maxLen (_, length) -> if length > maxLen then length else maxLen) 0 getMovieTitleAndLengthInColor
+    longest = foldl (\maxLen (_, length) -> if length > maxLen then length else maxLen) 0 getMovieTitleAndLengthInColor
 
+--Task 2
 getStudios :: MovieDB -> ([Year] -> [(StudioName, Name)])
 getStudios (movies, studios, execs) years = moviesInStudio
  where
