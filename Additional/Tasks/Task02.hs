@@ -1,4 +1,4 @@
--- task 01: Week06 -> Task01 (in class)
+-- Week06 -> Task01 (in class)
 
 main :: IO()
 main = do
